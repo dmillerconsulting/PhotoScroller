@@ -125,7 +125,6 @@
 				96D86BB71F816270005D7733 /* PhotoDetailViewController.swift */,
 				96D86BB31F815E9F005D7733 /* SearchViewController.swift */,
 				96D86BAC1F815E0F005D7733 /* TopPhotosCollectionViewController.swift */,
-				968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -164,6 +163,7 @@
 			children = (
 				96D86B8D1F81594A005D7733 /* Main.storyboard */,
 				96D86B951F81594A005D7733 /* LaunchScreen.storyboard */,
+				968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
