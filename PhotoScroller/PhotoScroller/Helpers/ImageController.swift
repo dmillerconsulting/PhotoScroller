@@ -16,9 +16,10 @@ class ImageController {
         guard let url = URL(string: url) else {
             fatalError("Image URL optional is nil")
         }
-        
+        //Get image as data
         NetworkController.performRequest(for: url, httpMethod: .Get) { (data, error) in
             guard let data = data,
+                // Turn data into image
                 let image = UIImage(data: data) else {
                     
                     DispatchQueue.main.async { completion(nil) }
