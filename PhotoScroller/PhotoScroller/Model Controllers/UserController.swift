@@ -10,13 +10,4 @@ import Foundation
 import UIKit
 
 class UserController {
-    
-    private let nsidKey = "nsid"
-    
-    let nsid: String
-    
-    init?(dictionary: [String:String]) {
-        guard let nsid = dictionary[nsidKey] else { return nil }
-        self.nsid = nsid
-    }
 }
