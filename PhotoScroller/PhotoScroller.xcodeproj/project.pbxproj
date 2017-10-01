@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		968E40251F818E2400AA2E8B /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */; };
 		96D86B8A1F81594A005D7733 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D86B891F81594A005D7733 /* AppDelegate.swift */; };
 		96D86B8F1F81594A005D7733 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D86B8D1F81594A005D7733 /* Main.storyboard */; };
 		96D86B921F81594A005D7733 /* PhotoScroller.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96D86B901F81594A005D7733 /* PhotoScroller.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoCollectionViewCell.swift; path = PhotoScroller/Views/PhotoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		96D86B861F81594A005D7733 /* PhotoScroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoScroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D86B891F81594A005D7733 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D86B8E1F81594A005D7733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				96D86BB71F816270005D7733 /* PhotoDetailViewController.swift */,
 				96D86BB31F815E9F005D7733 /* SearchViewController.swift */,
 				96D86BAC1F815E0F005D7733 /* TopPhotosCollectionViewController.swift */,
+				968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				96D86BBF1F81648C005D7733 /* Photo.swift in Sources */,
 				96D86BC51F81654B005D7733 /* UserController.swift in Sources */,
 				96D86BAD1F815E0F005D7733 /* TopPhotosCollectionViewController.swift in Sources */,
+				968E40251F818E2400AA2E8B /* PhotoCollectionViewCell.swift in Sources */,
 				96D86B8A1F81594A005D7733 /* AppDelegate.swift in Sources */,
 				96D86BBB1F8162E9005D7733 /* NetworkController.swift in Sources */,
 				96D86BC11F81649A005D7733 /* User.swift in Sources */,
