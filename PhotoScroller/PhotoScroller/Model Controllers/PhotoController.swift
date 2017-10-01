@@ -12,7 +12,11 @@ import UIKit
 class PhotoController {
     //Example Endpoint: https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&format=json&api_key=95120ae5940c9318841e1c9b86243299&group_id=80641914@N00
     let baseURL = URL(string: "https://api.flickr.com/services/rest/?")
-
+    
+    enum imageSize: String {
+        case Small = "n"
+        case Large = "k"
+    }
     
     //CRUD Functions
     
@@ -38,20 +42,15 @@ class PhotoController {
         }
     }
     
-    //Fetch small preview for displaying in collection view
-    func fetchSmallImageFor(_ photo: Photo, completion:@escaping (UIImage?) -> Void) {
+    //Fetch larger image
+    func fetchImageFor(_ photo: Photo, size: imageSize, completion: @escaping (UIImage?) -> Void) {
         //Example endpoint: https://farm5.staticflickr.com/4379/36941145645_f1de3df2d7_n.jpg
         
-        let url = "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_n.jpg"
+        let url = "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_\(size).jpg"
         
         ImageController.image(forURL: url) { (image) in
             guard let image = image else { return }
             completion(image)
         }
-    }
-    
-    //Fetch larger image
-    func fetchLargeImageFor(_ photo: Photo, completion: (UIImage?) -> Void) {
-        
     }
 }
