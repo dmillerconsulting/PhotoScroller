@@ -16,7 +16,7 @@ class PhotoController {
     
     enum imageSize: String {
         case Small = "n"
-        case Large = "k"
+        case Large = "b"
     }
     
     //CRUD Functions
@@ -62,7 +62,7 @@ class PhotoController {
         guard let baseURL = baseURL else { return }
         let urlParameters = ["format":"json",
                              "method":"flickr.photos.getExif",
-                             "api_key":"95120ae5940c9318841e1c9b86243299",
+                             "api_key":NetworkController.apiKey,
                              "photo_id":photo.id,
                              "nojsoncallback":"1"]
         

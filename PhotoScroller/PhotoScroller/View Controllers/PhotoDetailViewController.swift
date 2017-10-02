@@ -37,13 +37,25 @@ class PhotoDetailViewController: UIViewController {
     func updateViews() {
         guard let photo = photo else { return }
         PhotoController.sharedController.fetchCameraInfoFor(photo) { (cameraString) in
-            self.cameraLabel.text = cameraString
+            DispatchQueue.main.async {
+                self.cameraLabel.text = cameraString
+            }
         }
         PhotoController.sharedController.fetchImageFor(photo, size: .Large) { (largeImage) in
             self.photoImageView.image = largeImage
         }
+        UserController.sharedController.fetchUserDataFor(photo.ownerID) { (user) in
+            UserController.sharedController.fetchProfileImageFor(user, completion: { (profileImage) in
+                DispatchQueue.main.async {
+                    self.profileImageView.image = profileImage
+                }
+            })
+        }
         self.usernameLabel.text = self.photo?.ownerName
         self.titleLabel.text = self.photo?.title
+        
+        self.profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        self.profileImageView.clipsToBounds = true
     }
 
     // MARK: - Navigation

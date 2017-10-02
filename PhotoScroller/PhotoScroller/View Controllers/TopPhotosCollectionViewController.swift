@@ -25,6 +25,8 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.title = "Top Photos"
+        
         PhotoController.sharedController.fetchTopPhotos { (photos) in
             guard let photos = photos else { return }
             self.photos = photos

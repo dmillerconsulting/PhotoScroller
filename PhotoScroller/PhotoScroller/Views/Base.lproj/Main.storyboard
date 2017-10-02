@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -96,19 +97,33 @@
                                     <outlet property="delegate" destination="Hgg-lK-kXG" id="ufs-g6-bdv"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for a user name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qae-M4-v62">
-                                <rect key="frame" x="5" y="70" width="365" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ab0-Zq-5LQ">
+                                <rect key="frame" x="5" y="67" width="365" height="30"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for a user name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qae-M4-v62">
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFr-zc-bna">
+                                        <rect key="frame" x="289" y="0.0" width="76" height="30"/>
+                                        <state key="normal" title="Clear"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qae-M4-v62" firstAttribute="width" secondItem="ab0-Zq-5LQ" secondAttribute="width" multiplier="7/9" id="WwP-fy-fcy"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ab0-Zq-5LQ" firstAttribute="leading" secondItem="Gep-I6-slB" secondAttribute="leading" id="9mk-ba-Dol"/>
                             <constraint firstItem="Gep-I6-slB" firstAttribute="leading" secondItem="W1Y-Rf-fJa" secondAttribute="leading" constant="5" id="HMC-1A-gml"/>
                             <constraint firstItem="Gep-I6-slB" firstAttribute="trailing" secondItem="W1Y-Rf-fJa" secondAttribute="trailing" constant="-5" id="MHU-wU-OMb"/>
                             <constraint firstItem="Gep-I6-slB" firstAttribute="bottom" secondItem="W1Y-Rf-fJa" secondAttribute="bottom" id="c5b-MA-aO5"/>
+                            <constraint firstItem="Gep-I6-slB" firstAttribute="top" secondItem="ab0-Zq-5LQ" secondAttribute="bottom" constant="3" id="gec-kv-RN3"/>
+                            <constraint firstItem="ab0-Zq-5LQ" firstAttribute="width" secondItem="Gep-I6-slB" secondAttribute="width" id="kWy-Gl-NnL"/>
                             <constraint firstItem="Gep-I6-slB" firstAttribute="top" secondItem="W1Y-Rf-fJa" secondAttribute="top" constant="36" id="y9b-4E-I5f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W1Y-Rf-fJa"/>
@@ -125,7 +140,6 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="Ebu-69-GYL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Frl-UC-vZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="eVz-Ud-mVY" customClass="PhotoDetailViewController" customModule="PhotoScroller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BBJ-hJ-g6t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -206,6 +220,7 @@
                         <outlet property="usernameLabel" destination="NTt-Ce-G9m" id="sQ1-nn-S4X"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Frl-UC-vZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="736.79999999999995" y="1153.6731634182909"/>
         </scene>
@@ -225,7 +240,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve5-EJ-5J4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1214" y="761"/>
+            <point key="canvasLocation" x="-886" y="761"/>
         </scene>
     </scenes>
     <resources>
