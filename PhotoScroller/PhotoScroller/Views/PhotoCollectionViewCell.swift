@@ -29,7 +29,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             self.usernameLabel.text = photo.ownerName
             self.titleLabel.text = photo.title
             PhotoController.sharedController.fetchImageFor(photo, size: .Small, completion: { (image) in
-                guard let image = image else { return }
                 self.photoImageView.image = image
             })
         }
