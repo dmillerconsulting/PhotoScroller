@@ -12,14 +12,14 @@ import UIKit
 class PhotoController {
     static let sharedController = PhotoController()
     //Example Endpoint: https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&format=json&api_key=95120ae5940c9318841e1c9b86243299&group_id=80641914@N00
+    
+    //MARK: Properties
     let baseURL = URL(string: "https://api.flickr.com/services/rest/?")
     
     enum imageSize: String {
         case Small = "n"
         case Large = "b"
     }
-    
-    //CRUD Functions
     
     // Pull basic photo data from Flickr top photos
     func fetchTopPhotos(completion: @escaping ([Photo]?) -> Void) {
@@ -45,6 +45,7 @@ class PhotoController {
         }
     }
     
+    //Fetch photos from a specific user
     func fetchPhotosBy(_ user: User, completion: @escaping ([Photo]?) -> Void) {
         //Example Endpoint: https://api.flickr.com/services/rest/?api_key=95120ae5940c9318841e1c9b86243299&format=json&method=flickr.people.getPhotos&user_id=130399872@N03&nojsoncallback=1
         
@@ -82,6 +83,7 @@ class PhotoController {
         }
     }
     
+    //Fetch basic EXIF data to display with the Image details
     func fetchCameraInfoFor(_ photo: Photo, completion: @escaping (String) -> Void) {
         //Example Endpoint: https://api.flickr.com/services/rest/?method=flickr.photos.getExif&format=json&api_key=95120ae5940c9318841e1c9b86243299&photo_id=15884468442&nojsoncallback=1
         guard let baseURL = baseURL else { return }

@@ -34,6 +34,17 @@ class PhotoDetailViewController: UIViewController {
         self.dismiss(animated: true) { }
     }
     
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        let textToShare = "Check out this cool picture!"
+        
+        let itmesToShare = [textToShare, self.profileImageView.image] as [Any]
+        let activityVC = UIActivityViewController(activityItems: itmesToShare, applicationActivities: nil)
+        
+        activityVC.popoverPresentationController?.sourceView = sender as! UIView
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    //MARK: My Functions
     func updateViews() {
         guard let photo = photo else { return }
         PhotoController.sharedController.fetchCameraInfoFor(photo) { (cameraString) in
@@ -57,13 +68,5 @@ class PhotoDetailViewController: UIViewController {
         
         self.profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         self.profileImageView.clipsToBounds = true
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
 }

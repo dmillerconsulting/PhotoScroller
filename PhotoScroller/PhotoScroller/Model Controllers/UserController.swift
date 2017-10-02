@@ -39,6 +39,7 @@ class UserController {
         }
     }
     
+    //Fetch profile Image for a given user
     func fetchProfileImageFor(_ user: User, completion: @escaping (UIImage?) -> Void) {
         //Example Endpoint: http://farm8.staticflickr.com/5659/buddyicons/130399872@N03.jpg
         let imageURL = "http://farm\(user.iconFarm).staticflickr.com/\(user.iconServer)/buddyicons/\(user.nsid).jpg"

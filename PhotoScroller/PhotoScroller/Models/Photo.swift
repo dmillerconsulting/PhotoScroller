@@ -37,7 +37,7 @@ class Photo {
         self.server = server
     }
     
-    //MARK: Failable Initializer for top photos
+    //Failable Initializer for top photos
     init?(topPhotosDictionary: [String:Any]) {
         guard let id = topPhotosDictionary[idKey] as? String,
             let ownerID = topPhotosDictionary[ownerIDKey] as? String,
@@ -57,6 +57,7 @@ class Photo {
         self.server = server
     }
     
+    //Failable Initializer for user search result photos
     init?(userPhotosDictionary: [String:Any]) {
         guard let id = userPhotosDictionary[idKey] as? String,
             let ownerID = userPhotosDictionary[ownerIDKey] as? String,

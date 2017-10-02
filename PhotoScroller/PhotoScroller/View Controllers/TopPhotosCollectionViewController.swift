@@ -44,6 +44,15 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         }
     }
     
+    @IBAction func searchFieldEditingDidBegin(_ sender: Any) {
+        if searchField.text != "" {
+            DispatchQueue.main.async{
+                self.searchButton.isEnabled = true
+            }
+        }
+    }
+    
+    //MARK: My Functions
     func displayAlertController() {
         let alertController = UIAlertController(title: "Could Not Find User", message: "The user you searched for was not found", preferredStyle: .alert)
         
@@ -54,21 +63,14 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         self.present(alertController, animated: true)
     }
     
-    @IBAction func searchFieldValueChanged(_ sender: Any) {
-        if searchField.text != "" {
-            searchButton.isEnabled = true
+    func loadTopPhotos() {
+        PhotoController.sharedController.fetchTopPhotos { (photos) in
+            guard let photos = photos else { return }
+            self.photos = photos
         }
     }
     
-    @IBAction func searchFieldEditingDidBegin(_ sender: Any) {
-        if searchField.text != "" {
-            DispatchQueue.main.async{
-                self.searchButton.isEnabled = true
-            }
-        }
-    }
-    
-    
+    //MARK: Properties
     var photos: [Photo] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -77,6 +79,7 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         }
     }
 
+    //MARK: Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,17 +87,8 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         
         loadTopPhotos()
     }
-    
-    func loadTopPhotos() {
-        PhotoController.sharedController.fetchTopPhotos { (photos) in
-            guard let photos = photos else { return }
-            self.photos = photos
-        }
-    }
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailVC" {
             guard let destinationVC = segue.destination as? PhotoDetailViewController,
@@ -105,6 +99,7 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         }
     }
     
+    //MARK: DataSource and Delegate Functions
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "toDetailVC", sender: self)
     }
