@@ -9,8 +9,6 @@
 import Foundation
 
 class Photo {
-    //Example Endpoint: https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&format=json&api_key=95120ae5940c9318841e1c9b86243299&group_id=80641914@N00
-    
     //MARK: Dictionary Keys
     private let idKey = "id"
     private let ownerIDKey = "owner"
@@ -24,7 +22,7 @@ class Photo {
     let id: String
     let ownerID: String
     let title: String
-    let ownerName: String
+    var ownerName: String = ""
     let secret: String
     let farm: Int
     let server: String
@@ -39,21 +37,38 @@ class Photo {
         self.server = server
     }
     
-    //MARK: Failable Initializer
-    init?(dictionary: [String:Any]) {
-        guard let id = dictionary[idKey] as? String,
-            let ownerID = dictionary[ownerIDKey] as? String,
-            let title = dictionary[titleKey] as? String,
-            let ownerName = dictionary[ownerNameKey] as? String,
-            let secret = dictionary[secretKey] as? String,
-            let farm = dictionary[farmKey] as? Int,
-            let server = dictionary[serverKey] as? String
+    //MARK: Failable Initializer for top photos
+    init?(topPhotosDictionary: [String:Any]) {
+        guard let id = topPhotosDictionary[idKey] as? String,
+            let ownerID = topPhotosDictionary[ownerIDKey] as? String,
+            let title = topPhotosDictionary[titleKey] as? String,
+            let ownerName = topPhotosDictionary[ownerNameKey] as? String,
+            let secret = topPhotosDictionary[secretKey] as? String,
+            let farm = topPhotosDictionary[farmKey] as? Int,
+            let server = topPhotosDictionary[serverKey] as? String
             else { return nil }
         
         self.id = id
         self.ownerID = ownerID
         self.title = title
         self.ownerName = ownerName
+        self.secret = secret
+        self.farm = farm
+        self.server = server
+    }
+    
+    init?(userPhotosDictionary: [String:Any]) {
+        guard let id = userPhotosDictionary[idKey] as? String,
+            let ownerID = userPhotosDictionary[ownerIDKey] as? String,
+            let title = userPhotosDictionary[titleKey] as? String,
+            let secret = userPhotosDictionary[secretKey] as? String,
+            let farm = userPhotosDictionary[farmKey] as? Int,
+            let server = userPhotosDictionary[serverKey] as? String
+            else { return nil }
+        
+        self.id = id
+        self.ownerID = ownerID
+        self.title = title
         self.secret = secret
         self.farm = farm
         self.server = server

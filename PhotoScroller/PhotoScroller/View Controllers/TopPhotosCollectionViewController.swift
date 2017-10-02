@@ -10,9 +10,64 @@ import UIKit
 
 private let reuseIdentifier = "photoCell"
 
-class TopPhotosCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class TopPhotosCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    //MARK: IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
+    
+    //MARK: IBActions
+    @IBAction func searchButonTapped(_ sender: Any) {
+        if searchField.text != "", let searchText = searchField.text, self.searchButton.titleLabel?.text == "Search"{
+            UserController.sharedController.searchForUserWith(username: searchText) { (user) in
+                guard let user = user else {
+                    DispatchQueue.main.async {
+                        self.displayAlertController()
+                        self.searchField.text = ""
+                    };
+                    return }
+                PhotoController.sharedController.fetchPhotosBy(user, completion: { (photos) in
+                    guard let photos = photos else { return }
+                    self.photos = photos
+                    DispatchQueue.main.async {
+                        self.searchButton.titleLabel?.text = "Clear"
+                    }
+                })
+            }
+        } else if self.searchButton.titleLabel?.text == "Clear"{
+            DispatchQueue.main.async {
+                self.searchButton.titleLabel?.text = "Search"
+                self.searchField.text = ""
+                self.loadTopPhotos()
+            }
+        }
+    }
+    
+    func displayAlertController() {
+        let alertController = UIAlertController(title: "Could Not Find User", message: "The user you searched for was not found", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+        }
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
+    
+    @IBAction func searchFieldValueChanged(_ sender: Any) {
+        if searchField.text != "" {
+            searchButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func searchFieldEditingDidBegin(_ sender: Any) {
+        if searchField.text != "" {
+            DispatchQueue.main.async{
+                self.searchButton.isEnabled = true
+            }
+        }
+    }
+    
     
     var photos: [Photo] = [] {
         didSet {
@@ -27,6 +82,10 @@ class TopPhotosCollectionViewController: UIViewController, UICollectionViewDeleg
         
         navigationController?.title = "Top Photos"
         
+        loadTopPhotos()
+    }
+    
+    func loadTopPhotos() {
         PhotoController.sharedController.fetchTopPhotos { (photos) in
             guard let photos = photos else { return }
             self.photos = photos

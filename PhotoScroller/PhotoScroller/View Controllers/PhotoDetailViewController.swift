@@ -45,6 +45,7 @@ class PhotoDetailViewController: UIViewController {
             self.photoImageView.image = largeImage
         }
         UserController.sharedController.fetchUserDataFor(photo.ownerID) { (user) in
+            guard let user = user else { return }
             UserController.sharedController.fetchProfileImageFor(user, completion: { (profileImage) in
                 DispatchQueue.main.async {
                     self.profileImageView.image = profileImage

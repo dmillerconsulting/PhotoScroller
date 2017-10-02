@@ -40,7 +40,32 @@ class PhotoController {
                 let photoDictionaryArray = photosDictionary["photo"] as? [[String:Any]]
             else { return }
             
-            let photosArray = photoDictionaryArray.flatMap({ Photo.init(dictionary: $0) })
+            let photosArray = photoDictionaryArray.flatMap({ Photo.init(topPhotosDictionary: $0) })
+            completion(photosArray)
+        }
+    }
+    
+    func fetchPhotosBy(_ user: User, completion: @escaping ([Photo]?) -> Void) {
+        //Example Endpoint: https://api.flickr.com/services/rest/?api_key=95120ae5940c9318841e1c9b86243299&format=json&method=flickr.people.getPhotos&user_id=130399872@N03&nojsoncallback=1
+        
+        guard let baseURL = baseURL else { return }
+        let urlParameters = ["format":"json",
+                             "method":"flickr.people.getPhotos",
+                             "api_key":NetworkController.apiKey,
+                             "user_id":user.nsid,
+                             "nojsoncallback":"1"]
+        NetworkController.performRequest(for: baseURL, httpMethod: .Get, urlParameters: urlParameters, body: nil) { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Error with image request")
+            }
+            
+            guard let data = data,
+                let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String:Any],
+                let photosDictionary = jsonDictionary["photos"] as? [String:Any],
+                let photoDictionaryArray = photosDictionary["photo"] as? [[String:Any]]
+                else { return }
+            
+            let photosArray = photoDictionaryArray.flatMap({ Photo.init(userPhotosDictionary: $0) })
             completion(photosArray)
         }
     }
