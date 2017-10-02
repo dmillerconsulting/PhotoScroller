@@ -37,10 +37,10 @@ class PhotoDetailViewController: UIViewController {
     @IBAction func shareButtonTapped(_ sender: Any) {
         let textToShare = "Check out this cool picture!"
         
-        let itmesToShare = [textToShare, self.profileImageView.image] as [Any]
+        let itmesToShare = [textToShare, self.profileImageView.image as Any] as [Any]
         let activityVC = UIActivityViewController(activityItems: itmesToShare, applicationActivities: nil)
         
-        activityVC.popoverPresentationController?.sourceView = sender as! UIView
+        activityVC.popoverPresentationController?.sourceView = (sender as? UIView)
         self.present(activityVC, animated: true, completion: nil)
     }
     
