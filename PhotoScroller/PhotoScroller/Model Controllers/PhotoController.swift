@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class PhotoController {
+    static let sharedController = PhotoController()
     //Example Endpoint: https://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&format=json&api_key=95120ae5940c9318841e1c9b86243299&group_id=80641914@N00
     let baseURL = URL(string: "https://api.flickr.com/services/rest/?")
     
@@ -26,7 +27,8 @@ class PhotoController {
         let urlParameters = ["format":"json",
                              "method":"flickr.groups.pools.getPhotos",
                              "api_key":NetworkController.apiKey,
-                             "group_id":"80641914@N00"]
+                             "group_id":"80641914@N00",
+                             "nojsoncallback":"1"]
         NetworkController.performRequest(for: baseURL, httpMethod: .Get, urlParameters: urlParameters, body: nil) { (data, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Error with request")
@@ -34,7 +36,8 @@ class PhotoController {
             
             guard let data = data,
                 let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String:Any],
-                let photoDictionaryArray = jsonDictionary["photo"]as? [[String:Any]]
+                let photosDictionary = jsonDictionary["photos"] as? [String:Any],
+                let photoDictionaryArray = photosDictionary["photo"] as? [[String:Any]]
             else { return }
             
             let photosArray = photoDictionaryArray.flatMap({ Photo.init(dictionary: $0) })
@@ -46,7 +49,7 @@ class PhotoController {
     func fetchImageFor(_ photo: Photo, size: imageSize, completion: @escaping (UIImage?) -> Void) {
         //Example endpoint: https://farm5.staticflickr.com/4379/36941145645_f1de3df2d7_n.jpg
         
-        let url = "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_\(size).jpg"
+        let url = "https://farm\(photo.farm).staticflickr.com/\(photo.server)/\(photo.id)_\(photo.secret)_\(size.rawValue).jpg"
         
         ImageController.image(forURL: url) { (image) in
             guard let image = image else { return }

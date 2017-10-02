@@ -29,12 +29,15 @@ class Photo {
     let farm: Int
     let server: String
     
-    //    init(id: String, ownerID: String, title: String, ownerName: String) {
-    //        self.id = id
-    //        self.ownerID = ownerID
-    //        self.title = title
-    //        self.ownerName = ownerName
-    //    }
+    init(id: String, ownerID: String, title: String, ownerName: String, secret: String, farm: Int, server: String) {
+        self.id = id
+        self.ownerID = ownerID
+        self.title = title
+        self.ownerName = ownerName
+        self.secret = secret
+        self.farm = farm
+        self.server = server
+    }
     
     //MARK: Failable Initializer
     init?(dictionary: [String:Any]) {

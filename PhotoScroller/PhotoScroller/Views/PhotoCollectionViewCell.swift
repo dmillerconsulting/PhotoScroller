@@ -9,7 +9,11 @@
 import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
-    var photo: Photo?
+    var photo: Photo? {
+        didSet {
+            self.updateViews()
+        }
+    }
     
     //MARK: Outlets
     @IBOutlet weak var usernameLabel: UILabel!
@@ -19,7 +23,15 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     //MARK: Actions
     
     //MARK: Functions
-    func fetchImageFor(_ photo: Photo) {
+    func updateViews() {
+        DispatchQueue.main.async {
+            guard let photo = self.photo else { return }
+            self.usernameLabel.text = photo.ownerName
+            self.titleLabel.text = photo.title
+            PhotoController.sharedController.fetchImageFor(photo, size: .Small, completion: { (image) in
+                guard let image = image else { return }
+                self.photoImageView.image = image
+            })
+        }
     }
-    
 }

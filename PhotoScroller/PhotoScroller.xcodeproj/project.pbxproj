@@ -150,6 +150,7 @@
 		96D86BB11F815E42005D7733 /* Etc */ = {
 			isa = PBXGroup;
 			children = (
+				96D86B951F81594A005D7733 /* LaunchScreen.storyboard */,
 				96D86B901F81594A005D7733 /* PhotoScroller.xcdatamodeld */,
 				96D86B981F81594A005D7733 /* Info.plist */,
 				96D86B931F81594A005D7733 /* Assets.xcassets */,
@@ -162,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				96D86B8D1F81594A005D7733 /* Main.storyboard */,
-				96D86B951F81594A005D7733 /* LaunchScreen.storyboard */,
 				968E40241F818E2400AA2E8B /* PhotoCollectionViewCell.swift */,
 			);
 			path = Views;
